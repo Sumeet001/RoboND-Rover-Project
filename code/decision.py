@@ -1,4 +1,5 @@
 import numpy as np
+import time,datetime
 
 
 # This is where you can build a decision tree for determining throttle, brake and steer 
@@ -13,12 +14,21 @@ def decision_step(Rover):
     # Check if we have vision data to make decisions with
     if Rover.nav_angles is not None:
         # Check for Rover.mode status
+        
         if Rover.mode == 'forward': 
             # Check the extent of navigable terrain
             if len(Rover.nav_angles) >= Rover.stop_forward:  
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
-                if Rover.vel < Rover.max_vel:
+                print(Rover.nav_angles)
+                if Rover.checkIfRoverIsStuck() == True:
+                    print("Rover stuck")
+                    Rover.throttle = -10
+                   
+                    Rover.brake = Rover.brake_set
+                    Rover.steer = 0
+                    Rover.mode = 'stop'
+                elif Rover.vel < Rover.max_vel:
                     # Set throttle value to throttle setting
                     Rover.throttle = Rover.throttle_set
                 else: # Else coast
@@ -66,6 +76,9 @@ def decision_step(Rover):
         Rover.throttle = Rover.throttle_set
         Rover.steer = 0
         Rover.brake = 0
-
+    if(abs(Rover.vel)>=0.001):#checking if rover is stuck 
+        Rover.timeVelocityZero=time.mktime(datetime.datetime.now().timetuple())
+        print("current velocity is {0}".format(Rover.vel))
+    Rover.lastVelocity=Rover.vel    
     return Rover
 

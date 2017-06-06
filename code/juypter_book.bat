@@ -1,0 +1,1 @@
+C:\Users\Sumeet\Anaconda3\python.exe C:\Users\Sumeet\Anaconda3\cwp.py C:\Users\Sumeet\Anaconda3 "C:/Users/Sumeet/Anaconda3/python.exe" "C:/Users/Sumeet/Anaconda3/Scripts/jupyter-notebook-script.py" "G:\Udacity\final\RoboND-Rover-Project\code"
