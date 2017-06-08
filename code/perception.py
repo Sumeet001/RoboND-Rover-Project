@@ -20,7 +20,7 @@ def color_thresh(img, rgb_thresh=(160, 160, 160)):
                 & (img[:,:,2] < rgb_thresh[2])
     #rock thresold [100,98,76]
     
-    rock_thresh = (img[:,:,0] > 100) & (img[:,:,1] > 98) & (img[:,:,2] < 76)  
+    rock_thresh = (img[:,:,0] > 100) & (img[:,:,1] > 100) & (img[:,:,2] < 75)  
     
     # Index the array of zeros with the boolean array and set to 1
     color_select[:,:,0][obstacles_thresh] = 1 #obstacle pixels
@@ -117,7 +117,7 @@ def perception_step(Rover):
         # Example: Rover.vision_image[:,:,0] = obstacle color-thresholded binary image
         #          Rover.vision_image[:,:,1] = rock_sample color-thresholded binary image
         #          Rover.vision_image[:,:,2] = navigable terrain color-thresholded binary image
-    Rover.vision_image = img_sampled * 255 # maximize RGB values of binary mask images otherwise it'll appear too dark since the binary image values are just 1's
+    Rover.vision_image = img_sampled * 255 # maximize RGB values of binary mask images
   
     # 5) Convert map image pixel values to rover-centric coords
     cords_x_obsctacle,cords_y_obsctacle=rover_coords(img_sampled[:,:,0])
@@ -145,7 +145,7 @@ def perception_step(Rover):
         # Example: Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
         #          Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
         #          Rover.worldmap[navigable_y_world, navigable_x_world, 2] += 1
-    if ( (Rover.pitch < 0.2  or Rover.pitch > 359.8 ) and (Rover.roll < 0.1  or Rover.roll > 359.9 ) ):
+    if ( (Rover.pitch < 0.1  or Rover.pitch > 359.9 ) and (Rover.roll < 0.1  or Rover.roll > 359.9 ) ):
         Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
         Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
         Rover.worldmap[navigable_y_world, navigable_x_world, 2] += 1

@@ -20,7 +20,7 @@ def decision_step(Rover):
             if len(Rover.nav_angles) >= Rover.stop_forward:  
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
-                print(Rover.nav_angles)
+                #print(Rover.nav_angles)
                 if Rover.checkIfRoverIsStuck() == True:
                     print("Rover stuck")
                     Rover.throttle = -10
@@ -76,7 +76,7 @@ def decision_step(Rover):
         Rover.throttle = Rover.throttle_set
         Rover.steer = 0
         Rover.brake = 0
-    if(abs(Rover.vel)>=0.001):#checking if rover is stuck 
+    if(abs(Rover.vel>=0.03)):#checking if rover is stuck 
         Rover.timeVelocityZero=time.mktime(datetime.datetime.now().timetuple())
         print("current velocity is {0}".format(Rover.vel))
     Rover.lastVelocity=Rover.vel    

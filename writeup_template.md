@@ -40,18 +40,31 @@ You're reading it!
 #### 1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples.
 Here is an example of how to include an image in your writeup.
 
-![alt text][image1]
+
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
-And another! 
+And another!  
 
-![alt text][image2]
+steps:
+1. identify the pixles which are above threshold [160,160,160] for nav ground area
+2. identify the pixles which are below threshold [160,160,160] for obstacles
+3. identify the pixles which are  threshold [>100,>100,<75] for yellow rocks
+
+![color threshold image for nav,rock and obstacle][./color_threshold/nav_rock_obstacle_color_threshold.png]
+
 ### Autonomous Navigation and Mapping
 
-#### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
+#### 1. Fill in the `perc
+eption_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
+
+
+perceptio_step was modified to take rover camera image and identify image with navigable pixels,
+obstacles pixels and rock pixles to calculate navigable direction.
+Also to map each image to the world map to find covered area by rover.
 
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
+
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
