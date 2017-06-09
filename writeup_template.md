@@ -62,16 +62,29 @@ perceptio_step was modified to take rover camera image and identify image with n
 obstacles pixels and rock pixles to calculate navigable direction.
 Also to map each image to the world map to find covered area by rover.
 
+decision_step to check current mode of rover and based on image data if navigable area is present then
+drive forward with thrust configured. if there is no nav area then turn back
+
+Added rover stuck mode if rover velocity is less than .3 for more than 10 seconds then it tries to throttle 
+back to get out
+
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
+There are many improvements can be done
+
+1. Detecting always navigated maps to optimize the coverage faster
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Screen Resolution: 1024*768
+Graphics Quality : Fantastic
+
+FPS: 9-16
+
+I would like to use CV2 for image operations also understand rover motion mechanism and math behind some of the calcultions used.
+Also want to try to improve the performance by improving the calculations done as it hangs after sometime
 
 
-
-![alt text][image3]
-
+ 
 
